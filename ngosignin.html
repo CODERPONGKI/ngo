@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up and Login Portal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-image: url('https://t4.ftcdn.net/jpg/06/31/96/85/240_F_631968530_RSxhMGgnm6Zp0Y0yFG1OmBmiNoAgmi25.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 80%;
+            max-width: 1200px;
+            height: auto;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            width: 45%;
+            min-width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            margin: 10px;
+        }
+
+        .box h2 {
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .box select, .box input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .box button {
+            background-color: #ff1493;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .box button:hover {
+            background-color: #c71585;
+        }
+
+        .login-box {
+            display: none;
+        }
+
+        /* Styles for bigger and aligned login box */
+        .login-box .box {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 50px; /* Increased padding */
+            border-radius: 10px;
+            width: 50%; /* Wider login box */
+            min-width: 400px; /* Ensures it’s not too small */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            margin: 20px auto; /* Centered horizontally */
+        }
+
+        .login-box input, .login-box select {
+            margin: 15px 0;
+            padding: 15px; /* Bigger input fields */
+            width: 90%;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            outline: none;
+            font-size: 18px; /* Larger font size */
+        }
+
+        .login-box button {
+            background-color: #ff1493;
+            color: white;
+            padding: 15px; /* Bigger button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px; /* Larger font size */
+            transition: background-color 0.3s ease;
+        }
+
+        .login-box button:hover {
+            background-color: #c71585;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .box {
+                width: 100%;
+            }
+            .login-box .box {
+                width: 80%; /* Adjust login box width for smaller screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- User Sign Up Box -->
+    <div class="box" id="user-signup">
+        <h2>User Sign Up</h2>
+        <input type="text" id="userName" placeholder="Enter Name">
+        <select id="userCountryCode">
+            <option value="+1">+1 (USA)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+91">+91 (India)</option>
+            <option value="+61">+61 (Australia)</option>
+            <option value="+81">+81 (Japan)</option>
+            <!-- Add more country codes here -->
+        </select>
+        <input type="tel" id="userPhone" placeholder="Enter Phone Number">
+        <button onclick="storeUserData()">Sign Up</button>
+    </div>
+
+    <!-- NGO Sign Up Box -->
+    <div class="box" id="ngo-signup">
+        <h2>NGO Sign Up</h2>
+        <input type="text" id="ngoName" placeholder="Enter Name">
+        <select id="ngoCountryCode">
+            <option value="+1">+1 (USA)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+91">+91 (India)</option>
+            <option value="+61">+61 (Australia)</option>
+            <option value="+81">+81 (Japan)</option>
+            <!-- Add more country codes here -->
+        </select>
+        <input type="tel" id="ngoPhone" placeholder="Enter Phone Number">
+        <button onclick="storeNGOData()">Sign Up</button>
+    </div>
+</div>
+
+<!-- User Login Box -->
+<div class="container login-box" id="user-login-box">
+    <div class="box">
+        <h2>User Login</h2>
+        <input type="text" id="loginUserName" placeholder="Enter Name">
+        <select id="loginUserCountryCode">
+            <option value="+1">+1 (USA)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+91">+91 (India)</option>
+            <option value="+61">+61 (Australia)</option>
+            <option value="+81">+81 (Japan)</option>
+            <!-- Add more country codes here -->
+        </select>
+        <input type="tel" id="loginUserPhone" placeholder="Enter Phone Number">
+        <button onclick="userLogin()">Login</button>
+    </div>
+</div>
+
+<!-- NGO Login Box -->
+<div class="container login-box" id="ngo-login-box">
+    <div class="box">
+        <h2>NGO Login</h2>
+        <input type="text" id="loginNGOName" placeholder="Enter Name">
+        <select id="loginNGOCountryCode">
+            <option value="+1">+1 (USA)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+91">+91 (India)</option>
+            <option value="+61">+61 (Australia)</option>
+            <option value="+81">+81 (Japan)</option>
+            <!-- Add more country codes here -->
+        </select>
+        <input type="tel" id="loginNGOPhone" placeholder="Enter Phone Number">
+        <button onclick="ngoLogin()">Login</button>
+    </div>
+</div>
+
+<!-- After Login Page -->
+<div class="container login-box" id="welcome-box">
+    <div class="box">
+        <h2>Welcome, <span id="displayName"></span>!</h2>
+    </div>
+</div>
+
+<script>
+    // Store user data locally
+    function storeUserData() {
+        const name = document.getElementById("userName").value.trim();
+        const countryCode = document.getElementById("userCountryCode").value;
+        const phone = document.getElementById("userPhone").value.trim();
+
+        if (name && phone) {
+            localStorage.setItem("userName", name);
+            localStorage.setItem("userPhone", countryCode + phone);
+            showUserLogin();
+        } else {
+            alert("Please fill in all fields.");
+        }
+    }
+
+    // Store NGO data locally
+    function storeNGOData() {
+        const name = document.getElementById("ngoName").value.trim();
+        const countryCode = document.getElementById("ngoCountryCode").value;
+        const phone = document.getElementById("ngoPhone").value.trim();
+
+        if (name && phone) {
+            localStorage.setItem("ngoName", name);
+            localStorage.setItem("ngoPhone", countryCode + phone);
+            showNGOLogin();
+        } else {
+            alert("Please fill in all fields.");
+        }
+    }
+
+    // Show user login form
+    function showUserLogin() {
+        document.querySelector('.container').style.display = 'none';
+        document.getElementById('user-login-box').style.display = 'flex';
+    }
+
+    // Show NGO login form
+    function showNGOLogin() {
+        document.querySelector('.container').style.display = 'none';
+        document.getElementById('ngo-login-box').style.display = 'flex';
+    }
+
+    // User login validation
+    function userLogin() {
+        const enteredName = document.getElementById("loginUserName").value.trim();
+        const enteredPhone = document.getElementById("loginUserCountryCode").value + document.getElementById("loginUserPhone").value.trim();
+
+        const storedName = localStorage.getItem("userName");
+        const storedPhone = localStorage.getItem("userPhone");
+
+        if (enteredName === storedName && enteredPhone === storedPhone) {
+            document.getElementById('user-login-box').style.display = 'none';
+            showWelcome(storedName);
+        } else {
+            alert("Incorrect login details. Please try again.");
+        }
+    }
+
+    // NGO login validation
+    function ngoLogin() {
+        const enteredName = document.getElementById("loginNGOName").value.trim();
+        const enteredPhone = document.getElementById("loginNGOCountryCode").value + document.getElementById("loginNGOPhone").value.trim();
+
+        const storedName = localStorage.getItem("ngoName");
+        const storedPhone = localStorage.getItem("ngoPhone");
+
+        if (enteredName === storedName && enteredPhone === storedPhone) {
+            document.getElementById('ngo-login-box').style.display = 'none';
+            showWelcome(storedName);
+        } else {
+            alert("Incorrect login details. Please try again.");
+        }
+    }
+
+    // Show welcome page
+    function showWelcome(name) {
+        document.getElementById('welcome-box').style.display = 'flex';
+        document.getElementById('displayName').textContent = name;
+    }
+    // NGO login validation
+function ngoLogin() {
+    const enteredName = document.getElementById("loginNGOName").value.trim();
+    const enteredPhone = document.getElementById("loginNGOCountryCode").value + document.getElementById("loginNGOPhone").value.trim();
+
+    const storedName = localStorage.getItem("ngoName");
+    const storedPhone = localStorage.getItem("ngoPhone");
+
+    if (enteredName === storedName && enteredPhone === storedPhone) {
+        document.getElementById('ngo-login-box').style.display = 'none';
+        // Redirect to ngo.html instead of showing a welcome message
+        window.location.href = 'ngo.html'; // Redirect to ngo.html
+    } else {
+        alert("Incorrect login details. Please try again.");
+    }
+}
+
+</script>
+
+</body>
+</html>
